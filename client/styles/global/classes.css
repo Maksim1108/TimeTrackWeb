@@ -1,0 +1,40 @@
+.form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2c2c2c;
+    padding: 100px;
+    border-radius: 30px;
+}
+
+.form label {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+.form-input {
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+.form-button {
+    text-align: center;
+    width: 100px;
+    height: 28px;
+    margin-top: 4px;
+    border-radius: 30px;
+    transition-duration: 0.2s;
+}
+
+.form-close {
+    position: absolute;
+    width: 24px;
+    top: 30px;
+    right: 30px;
+}

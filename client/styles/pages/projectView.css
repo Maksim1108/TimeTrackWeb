@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import "../global/base.css";
+@import "../global/classes.css";
+
+.projectView {
+    padding: 34px 0 398px 0;
+    background-color: #000000;
+}
+
+.projectView__row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectView__name {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.projectView__button {
+    text-align: center;
+    width: 126px;
+    height: 44px;
+    border-radius: 30px;
+    transition-duration: 0.2s;
+}
+
+.projectView__button:hover,
+.projectView__item-button:hover {
+    transform: scale(0.95);
+    transition-duration: 0.2s;
+}
+
+.projectView__tasks {
+    margin: 32px 0 0 0;
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    padding: 24px;
+}
+
+.projectView__title {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.projectView__item {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 18px 16px;
+    background-color: #000000;
+    border-radius: 24px;
+    margin-bottom: 16px;
+    color: #ffffff;
+}
+
+.projectView__item-timer {
+    font-size: 14px;
+    color: #bdbdbd;
+    margin-left: 16px;
+}
+
+.projectView__item-button {
+    text-align: center;
+    width: 90px;
+    height: 28px;
+    border-radius: 30px;
+    transition-duration: 0.2s;
+    background-color: #e8890a;
+    color: #ffffff;
+    margin-left: 12px;
+}
+
+.projectView__list-empty {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.projectView__form {
+    display: none;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    background-color: #2c2c2c;
+}
+
+.footer__info {
+    font-size: 14px;
+    color: #ffffff;
+}

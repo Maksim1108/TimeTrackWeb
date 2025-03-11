@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../styles/pages/projects.css">
+    <link rel="icon" href="../assets/logo.png">
+    <title>Projects</title>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__content">
+            <a href="index.html" class="header__logo"><img src="../assets/logo.png" alt="logo" class="header__img">TimeTrackWeb</a>
+        </div>
+    </div>
+</header>
+<section class="projects">
+    <div class="container">
+        <div class="projects__content">
+            <form class="projects__form form">
+                <button type="button" class="projects__form-close form-close"><img alt="close" src="../assets/close.png"></button>
+                <label>
+                    <span>Name of Project</span>
+                    <input name="projects__form-name" class="projects__input form-input" type="text">
+                </label>
+                <label>
+                    <span>Description</span>
+                    <input name="projects__form-description" class="projects__input form-input" type="text">
+                </label>
+                <button type="submit" class="projects__form-button form-button">Add</button>
+            </form>
+            <div class="projects__row">
+                <span class="project__title">Projects List</span>
+                <div class="projects__buttons">
+                    <button class="projects__button"><a class="projects__link">Add Project</a></button>
+                    <button class="projects__button"><a class="projects__link">Statistics</a></button>
+                </div>
+            </div>
+            <div class="project__list"></div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__content">
+            <span class="footer__info">©2025 TimeTrackWeb.</span>
+        </div>
+    </div>
+</footer>
+
+<script src="../scripts/pages/projects.js"></script>
+</body>
+</html>
