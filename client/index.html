@@ -5,8 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../styles/global/index.css">
-    <link rel="icon" href="../assets/logo.png">
+    <link rel="stylesheet" href="styles/global/index.css">
+    <link rel="icon" href="assets/logo.png">
     <title>TimeTrackWeb</title>
 </head>
 <body>
@@ -17,12 +17,18 @@
             <p class="hero__description">Track your projects and time effortlessly with TimeTrackWeb. Our interface help
                 you manage your tasks efficiently.</p>
             <div class="hero__row row">
-                <button class="hero__button"><a href="projects.html" class="hero__link">View Projects</a>
+                <button class="hero__button"><a href="pages/projects.html" class="hero__link">View Projects</a>
                 </button>
                 <button class="hero__button"><a class="hero__link">View Statistics</a></button>
             </div>
         </div>
     </div>
 </section>
+<script>
+    const token = localStorage.getItem('token');
+    if(token != undefined) {
+        window.location.href = 'pages/projects.html'
+    }
+</script>
 </body>
 </html>
