@@ -1,31 +1,40 @@
-// Импорт необходимых модулей и файлов
-const express = require('express')
-const cors = require("cors")
-const {registration, login} = require("./controllers/authController");
+const express = require('express');
+const cors = require("cors");
 
-// Создание серверной оболочки
-const app = express()
+const { registration, login } = require("./controllers/authController");
+const { getUser } = require("./controllers/userController");
+const { addProject, getProjects, getProject } = require("./controllers/projectController");
+const { addTask, getTasks, updateTaskTime } = require("./controllers/taskController");
+const { validateRegistration } = require("./middlewares/registration");
+
+const app = express();
 const PORT = 1828;
 
-app.use(express.json());
 app.use(cors({
-    origin: "http://localhost",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"]
+    origin: "http://localhost:63342",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
+app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send("Hello World!");
-})
+// Auth
+app.post('/registration', validateRegistration, registration);
+app.post('/login', login);
 
-app.post('/registration', registration);
-app.post('/login', login)
+// Projects
+app.post('/add-project', addProject);
+app.post('/get-projects', getProjects);
+app.get('/get-project/:id', getProject);
 
-// Запуск сервера на указанном порту
+// Tasks
+app.post('/add-task', addTask);
+app.post('/get-tasks', getTasks);
+app.post('/update-task-time', updateTaskTime);
+
+// User
+app.get('/get-user', getUser);
+
+// Start server
 app.listen(PORT, () => {
-    try {
-        console.log(`Server listen on ${PORT} port`)
-    } catch (err) {
-        console.log(err)
-    }
-})
+    console.log(`Server listening on port ${PORT}`);
+});

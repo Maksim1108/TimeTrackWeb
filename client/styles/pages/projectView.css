@@ -3,7 +3,7 @@
 @import "../global/classes.css";
 
 .projectView {
-    padding: 34px 0 398px 0;
+    padding: 34px 0 0 0;
     background-color: #000000;
 }
 
@@ -32,6 +32,8 @@
 }
 
 .projectView__tasks {
+    display: flex;
+    flex-direction: column;
     margin: 32px 0 0 0;
     background-color: #2c2c2c;
     border-radius: 15px;
@@ -81,9 +83,19 @@
     display: none;
 }
 
+#timeChart { width: 80%; max-width: 600px; margin: 0 auto; }
+
+.projectView__chart {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+}
+
 .footer {
     display: flex;
     justify-content: center;
+    margin-top: 398px;
     padding: 40px 0;
     background-color: #2c2c2c;
 }

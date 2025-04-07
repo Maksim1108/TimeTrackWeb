@@ -21,6 +21,7 @@
 .form-input {
     margin-bottom: 12px;
     border-radius: 6px;
+    height: 24px;
 }
 
 .form-button {
@@ -34,7 +35,86 @@
 
 .form-close {
     position: absolute;
-    width: 24px;
-    top: 30px;
-    right: 30px;
+    width: 60px;
+    height: 60px;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
+
+.close-img {
+    width: 30px;
+}
+
+.user {
+    position: relative;
+}
+
+.user__name {
+    width: 36px;
+    height: 36px;
+    background-color: #888888;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 24px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.user__dropdown {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 30px;
+    width: 340px;
+    height: 240px;
+    padding-top: 30px;
+}
+
+.user__name.dropdown {
+    width: 56px;
+    height: 56px;
+    font-size: 40px;
+    margin: 12px 0;
+}
+
+.user__greeting {
+    font-size: 20px;
+}
+
+.user__logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 36px;
+    font-size: 16px;
+    background-color: #888888;
+    border-radius: 30px;
+    transition-duration: 0.2s;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 12px;
+    color: #000000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
+}
+
+
+

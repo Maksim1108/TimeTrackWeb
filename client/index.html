@@ -17,17 +17,16 @@
             <p class="hero__description">Track your projects and time effortlessly with TimeTrackWeb. Our interface help
                 you manage your tasks efficiently.</p>
             <div class="hero__row row">
-                <button class="hero__button"><a href="pages/projects.html" class="hero__link">View Projects</a>
-                </button>
-                <button class="hero__button"><a class="hero__link">View Statistics</a></button>
+                <button class="hero__button"><a href="./pages/authentication.html" class="hero__link">Log in</a></button>
             </div>
+
         </div>
     </div>
 </section>
+
 <script>
-    const token = localStorage.getItem('token');
-    if(token != undefined) {
-        window.location.href = 'pages/projects.html'
+    if (localStorage.getItem('token')) {
+        window.location.href = './pages/projects.html';
     }
 </script>
 </body>

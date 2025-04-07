@@ -34,22 +34,14 @@
 }
 
 .hero__button {
+    color: #ffffff;
+    background-color: #e8890a;
     text-align: center;
     width: 126px;
     height: 44px;
     border-radius: 30px;
     margin: 0 8px;
     transition-duration: 0.2s;
-}
-
-.hero__button:nth-child(1) {
-    color: #161616;
-    background-color: #ffffff;
-}
-
-.hero__button:nth-child(2) {
-    color: #ffffff;
-    background-color: #e8890a;
 }
 
 .hero__button:hover {

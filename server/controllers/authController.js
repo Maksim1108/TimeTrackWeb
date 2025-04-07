@@ -2,7 +2,6 @@ const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Допилить корректное добавление createdAt и lastLogin
 const registration = async (req, res) => {
     try {
         const {username, password, email} = req.body;
@@ -15,8 +14,8 @@ const registration = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await pool.query(
-            'INSERT INTO users (username, password, email) VALUES ($1, $2, $3) RETURNING *',
-            [username, hashedPassword, email]
+            'INSERT INTO users (username, password, email, role) VALUES ($1, $2, $3, $4) RETURNING *',
+            [username, hashedPassword, email, "user"]
         );
 
         res.status(201).json(user.rows[0]);

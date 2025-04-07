@@ -6,6 +6,7 @@
     <title>Authentication</title>
     <link rel="stylesheet" href="../styles/pages/authentication.css">
     <link rel="icon" href="../assets/logo.png">
+    <title>TimeTrackWeb | Authentication</title>
 </head>
 <body>
 <div class="container">
@@ -31,6 +32,10 @@
     </div>
 </div>
 <script>
+    if (localStorage.getItem('token')) {
+        window.location.href = './projects.html';
+    }
+
     function toggleForms() {
         document.getElementById('login-container').classList.toggle('hidden');
         document.getElementById('register-container').classList.toggle('hidden');
