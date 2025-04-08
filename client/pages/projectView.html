@@ -13,44 +13,42 @@
     <title>TimeTrackWeb | Project</title>
 </head>
 <body>
+<div id="projectViewOverlay" class="overlay hidden"></div>
 <div class="projectView">
     <div class="container">
-        <form class="projectView__form form">
-            <button type="button" class="projectView__form-close form-close"><img alt="close" src="../assets/close.png">
-            </button>
-            <label>
-                <span>Name of Task</span>
-                <input name="projectView__form-name" class="projectsView__form-input form-input" type="text">
-            </label>
-            <button type="submit" class="projectView__form-button form-button">Add</button>
-        </form>
-        <div class="projectView__row">
-            <span class="projectView__name">Project Name: </span>
-            <div>
-                <button style="margin-right: 6px" class="projectView__button">Add Task</button>
-                <button style="background-color: #e8890a; color: #ffffff" class="projectView__button">Statistics</button>
+        <div class="projectView__content" style="flex: 1">
+            <form class="projectView__form form">
+                <button type="button" class="projectView__form-close form-close"><img alt="close" src="../assets/close.png">
+                </button>
+                <label>
+                    <span>Name of Task</span>
+                    <input name="projectView__form-name" class="projectsView__form-input form-input" type="text">
+                </label>
+                <button type="submit" class="projectView__form-button form-button">Add</button>
+            </form>
+            <div class="projectView__row">
+                <span class="projectView__name">Project Name: </span>
+                <div>
+                    <button style="margin-right: 6px" class="projectView__button">Add Task</button>
+                    <button style="background-color: #e8890a; color: #ffffff" class="projectView__button">Statistics</button>
+                </div>
             </div>
-        </div>
-        <div class="projectView__tasks">
-            <span class="projectView__title">Tasks</span>
-            <span class="projectView__list-empty">Task list is empty...</span>
-            <ul class="projectView__list"></ul>
-        </div>
-        <div class="projectView__chart">
-            <canvas id="timeChart"></canvas>
-            <div class="chart-container" style="position: relative; height: 500px; width: 100%">
-                <canvas id="ganttChart"></canvas>
+            <div class="projectView__tasks-wrapper">
+                <div class="projectView__tasks">
+                    <button id="toggleTasks" class="projectView__toggle-button">Hide</button>
+                    <span class="projectView__list-empty">Task list is empty...</span>
+                    <ul class="projectView__list"></ul>
+                </div>
+            </div>
+            <div class="projectView__chart">
+                <canvas id="timeChart"></canvas>
+                <div class="chart-container" style="position: relative; height: 500px; width: 100%">
+                    <canvas id="ganttChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<footer class="footer">
-    <div class="container">
-        <div class="footer__content">
-            <span class="footer__info">©2025 TimeTrackWeb.</span>
-        </div>
-    </div>
-</footer>
 <script type="module" src="../scripts/pages/projectsView.js"></script>
 </body>
 </html>

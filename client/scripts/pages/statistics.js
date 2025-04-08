@@ -1,12 +1,5 @@
 const list = document.querySelector(".statistics__list");
 
-const createEmptyInscription = () => {
-    const empty = document.createElement("span");
-    empty.classList.add("projects__empty");
-    empty.textContent = "Projects list is empty...";
-    projectList?.appendChild(empty);
-};
-
 window.addEventListener("load", async () => {
     const token = localStorage.getItem("token");
 
