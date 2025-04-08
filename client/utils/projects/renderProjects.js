@@ -1,22 +1,85 @@
+import {deleteProject, updateProject} from "../api/project.js";
+
 export const createNewProject = (project, projectList) => {
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("projects__item");
-    const nameSpan = document.createElement("span");
-    nameSpan.classList.add("projects__name");
-    nameSpan.textContent = project.name;
-    const descriptionP = document.createElement("p");
-    descriptionP.classList.add("projects__description");
-    descriptionP.textContent = project.description;
-    const date = document.createElement("span");
-    date.classList.add("projects__date");
-    date.textContent = `${project.created_at ? project.created_at.split("T")[0] : '—'} / ${project.completed_at ? project.completed_at.split("T")[0] : '—'}`;
-    newDiv.appendChild(nameSpan);
-    newDiv.appendChild(descriptionP);
-    newDiv.appendChild(date);
-    projectList?.appendChild(newDiv);
-    newDiv.addEventListener("click", () => {
-        window.location.href = `projectView.html?id=${project.project_id}`;
+    if (!project || !projectList) return;
+
+    const projectElement = document.createElement("div");
+    projectElement.classList.add("projects__item");
+    projectElement.dataset.projectId = project.project_id;
+
+    const contentWrapper = document.createElement("div");
+    contentWrapper.classList.add("projects__content");
+
+    const nameElement = document.createElement("span");
+    nameElement.classList.add("projects__name");
+    nameElement.textContent = project.name || "Without name";
+
+    const descriptionElement = document.createElement("p");
+    descriptionElement.classList.add("projects__description");
+    descriptionElement.textContent = project.description || "Without description";
+
+    const formatDate = (dateString) => dateString ? dateString.split("T")[0] : '—';
+    const dateElement = document.createElement("span");
+    dateElement.classList.add("projects__date");
+    dateElement.textContent = `${formatDate(project.created_at)} / ${formatDate(project.completed_at)}`;
+
+
+    const completeButton = document.createElement("button");
+    completeButton.classList.add("projects__complete-button");
+    completeButton.textContent = "✓";
+    completeButton.title = "Complete project";
+    completeButton.style.display = "none";
+    project.completed_at ? completeButton.disabled = true : completeButton.disabled = false
+    completeButton.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to complete this project?")) {
+            try {
+                await updateProject(project.project_id, formatDate(new Date().toISOString()));
+                dateElement.textContent = `${formatDate(project.created_at)} / ${formatDate(new Date().toISOString())}`;
+            } catch (err) {
+                alert("Failed to complete the project");
+                console.error(err)
+            }
+        }
+    })
+
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("projects__delete-button");
+    deleteButton.textContent = "🗑";
+    deleteButton.title = "Delete project";
+    deleteButton.style.display = "none";
+    deleteButton.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to delete this project?")) {
+            try {
+                await deleteProject(project.project_id);
+                window.location.reload();
+            } catch(err) {
+                alert("Failed to delete the project:");
+                console.error(err)
+            }
+        }
+    })
+
+    contentWrapper.append(nameElement, descriptionElement, dateElement);
+    projectElement.append(contentWrapper, completeButton, deleteButton);
+
+    projectElement.addEventListener("mouseenter", () => {
+        completeButton.style.display = "block";
+        deleteButton.style.display = "block";
     });
+
+    projectElement.addEventListener("mouseleave", () => {
+        completeButton.style.display = "none";
+        deleteButton.style.display = "none";
+    });
+
+    projectElement.addEventListener("click", (e) => {
+        if (!e.target.classList.contains("projects__complete-button") && !e.target.classList.contains("projects__delete-button")) {
+            window.location.href = `projectView.html?id=${project.project_id}`;
+        }
+    });
+
+    projectList.appendChild(projectElement);
+    return projectElement;
 };
 
 export const createEmptyInscription = (projectList) => {

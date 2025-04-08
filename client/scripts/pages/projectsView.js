@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const project = await getProjectById(projectID);
     projectName.textContent += project.name;
 
+    project.completed_at != null ? button.disabled = true : null;
+
     const tasks = await getTasks(projectID);
 
     if (tasks.length > 0) {
@@ -29,8 +31,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         tasks.forEach(task => tasksList.appendChild(createTask(task)));
         renderChart(tasks, gantt2);
     } else {
-        statisticsButton.setAttribute("disabled", "");
-        statisticsButton.style.backgroundColor = "#bdbdbd";
+        statisticsButton.disabled = true;
+        statisticsButton.style.backgroundColor = 'rgba(239, 239, 239, 0.3)';
+        statisticsButton.style.color = 'rgba(16, 16, 16, 0.3)';
         chartContainer.style.display = 'none';
     }
 });
