@@ -1,14 +1,15 @@
+require('dotenv').config()
 const express = require('express');
 const cors = require("cors");
 
-const {registration, login} = require("./controllers/authController");
+const {registration, login, confirm} = require("./controllers/authController");
 const {getUser} = require("./controllers/userController");
 const {addProject, getProjects, getProject, updateProject, deleteProject} = require("./controllers/projectController");
 const {addTask, getTasks, updateTaskTime} = require("./controllers/taskController");
 const {validateRegistration} = require("./middlewares/registration");
 
 const app = express();
-const PORT = 1828;
+const PORT = process.env.PORT;
 
 app.use(cors({
     origin: "http://localhost:63342",
@@ -20,6 +21,7 @@ app.use(express.json());
 // Auth
 app.post('/registration', validateRegistration, registration);
 app.post('/login', login);
+app.get('/confirm/:token', confirm);
 
 // Projects
 app.post('/add-project', addProject);

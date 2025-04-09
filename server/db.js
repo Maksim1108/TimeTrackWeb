@@ -6,7 +6,7 @@ const pool = new Pool({
     host: process.env.HOST,         // Хост
     database: process.env.DATABASE,    // Имя базы данных
     password: process.env.PASSWORD,   // Пароль пользователя
-    port: process.env.PORT,      // Порт PostgreSQL
+    port: process.env.DBPORT,      // Порт PostgreSQL
 });
 
 module.exports = pool;
