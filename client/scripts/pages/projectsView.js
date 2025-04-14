@@ -21,6 +21,7 @@ const projectID = new URLSearchParams(window.location.search).get('id');
 document.addEventListener("DOMContentLoaded", async () => {
     const project = await getProjectById(projectID);
     projectName.textContent += project.name;
+    document.title = `TimeTrackWeb | ${project.name}`
 
     project.completed_at != null ? button.disabled = true : null;
 

@@ -1,0 +1,29 @@
+@media (max-width: 391px) {
+    .container {
+        max-width: 370px;
+    }
+
+    .projects__row {
+        flex-direction: column;
+        align-items: start !important;
+        margin-left: 12px;
+    }
+
+    .project__title {
+        margin-bottom: 12px;
+    }
+
+    .projects__description {
+        max-width: 300px;
+    }
+
+    .projects__item {
+        min-height: 134px;
+        padding: 16px !important;
+    }
+
+    .projects__graph {
+        height: 150px;
+        width: 350px !important;
+    }
+}

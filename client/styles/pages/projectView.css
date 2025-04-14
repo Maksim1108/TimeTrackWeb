@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 @import "../global/base.css";
 @import "../global/classes.css";
+@import "../media/projectView.css";
 
 .projectView {
     padding: 34px 0 0 0;
