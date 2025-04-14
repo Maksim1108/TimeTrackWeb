@@ -1,5 +1,4 @@
-import { updateTaskTime } from "../api/task.js";
-
+import {deleteTask, updateTask, updateTaskTime} from "../api/task.js"; // Предполагаем, что эти функции есть в API
 
 let activeTimer = null;
 let currentTaskId = null;
@@ -9,7 +8,6 @@ const formatTime = totalSeconds => {
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
-
     return [hours, minutes, seconds]
         .map(part => part.toString().padStart(2, '0'))
         .join(':');
@@ -45,46 +43,27 @@ export const createTask = task => {
     const stopButton = document.createElement('button');
     stopButton.classList.add('projectView__item-button');
     stopButton.textContent = 'Stop';
-    stopButton.disabled = true;
+
+    const completeButton = document.createElement("button");
+    completeButton.classList.add("projectView__complete-button");
+    completeButton.textContent = "✓";
+    completeButton.title = "Complete task";
+    completeButton.style.display = "none";
+    task.completed_at ? (completeButton.disabled = true, startButton.disabled = true, stopButton.disabled = true) : (completeButton.disabled = false, startButton.disabled = false,stopButton.disabled = false);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.classList.add("projectView__delete-button");
+    deleteButton.textContent = "🗑";
+    deleteButton.title = "Delete task";
+    deleteButton.style.display = "none";
 
     const buttonsContainer = document.createElement('div');
-    buttonsContainer.append(startButton, stopButton);
+    buttonsContainer.append(startButton, stopButton, completeButton, deleteButton);
 
     taskElement.append(nameElement, dateElement, buttonsContainer);
 
     let currentSeconds = parseTime(task.timer);
     let isTimerRunning = false;
-
-    startButton.addEventListener('click', () => {
-        if (isTimerRunning) return;
-
-        if (activeTimer) {
-            clearInterval(activeTimer);
-        }
-
-        currentTaskId = task.task_id;
-        isTimerRunning = true;
-        lastUpdateTime = Date.now();
-
-        activeTimer = setInterval(() => {
-            currentSeconds++;
-            timerElement.textContent = formatTime(currentSeconds);
-
-            if (Date.now() - lastUpdateTime > 30000) {
-                saveTime();
-            }
-        }, 1000);
-
-        startButton.disabled = true;
-        stopButton.disabled = false;
-    });
-
-    stopButton.addEventListener('click', async () => {
-        if (!isTimerRunning || currentTaskId !== task.task_id) return;
-
-        stopTimer();
-        await saveTime();
-    });
 
     const saveTime = async () => {
         try {
@@ -95,18 +74,71 @@ export const createTask = task => {
         }
     };
 
-
     const stopTimer = () => {
         clearInterval(activeTimer);
         activeTimer = null;
         isTimerRunning = false;
         currentTaskId = null;
-
-        startButton.disabled = false;
-        stopButton.disabled = true;
     };
 
-    taskElement.stopTimer = stopTimer;
+    startButton.addEventListener('click', () => {
+        if (isTimerRunning) return;
+        if (activeTimer) clearInterval(activeTimer);
 
+        currentTaskId = task.task_id;
+        isTimerRunning = true;
+        lastUpdateTime = Date.now();
+
+        activeTimer = setInterval(() => {
+            currentSeconds++;
+            timerElement.textContent = formatTime(currentSeconds);
+            if (Date.now() - lastUpdateTime > 30000) saveTime();
+        }, 1000);
+    });
+
+    stopButton.addEventListener('click', async () => {
+        if (!isTimerRunning || currentTaskId !== task.task_id) return;
+        stopTimer();
+        await saveTime();
+    });
+
+    completeButton.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to complete this task?")) {
+            try {
+                await updateTask(task.task_id, formatDate(new Date().toISOString()));
+                dateElement.textContent = `${formatDate(task.created_at)} / ${formatDate(new Date().toISOString())}`;
+                completeButton.disabled = true;
+                window.location.reload();
+            } catch (err) {
+                alert("Failed to complete the task");
+                console.error(err);
+            }
+        }
+    });
+
+    deleteButton.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to delete this task?")) {
+            try {
+                await deleteTask(task.task_id);
+                taskElement.remove();
+                window.location.reload();
+            } catch (err) {
+                alert("Failed to delete the task");
+                console.error(err);
+            }
+        }
+    });
+
+    taskElement.addEventListener("mouseenter", () => {
+        completeButton.style.display = "block";
+        deleteButton.style.display = "block";
+    });
+
+    taskElement.addEventListener("mouseleave", () => {
+        completeButton.style.display = "none";
+        deleteButton.style.display = "none";
+    });
+
+    taskElement.stopTimer = stopTimer;
     return taskElement;
 };

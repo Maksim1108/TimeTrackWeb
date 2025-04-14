@@ -23,7 +23,6 @@ export const createNewProject = (project, projectList) => {
     dateElement.classList.add("projects__date");
     dateElement.textContent = `${formatDate(project.created_at)} / ${formatDate(project.completed_at)}`;
 
-
     const completeButton = document.createElement("button");
     completeButton.classList.add("projects__complete-button");
     completeButton.textContent = "✓";
@@ -35,6 +34,7 @@ export const createNewProject = (project, projectList) => {
             try {
                 await updateProject(project.project_id, formatDate(new Date().toISOString()));
                 dateElement.textContent = `${formatDate(project.created_at)} / ${formatDate(new Date().toISOString())}`;
+                window.location.reload();
             } catch (err) {
                 alert("Failed to complete the project");
                 console.error(err)

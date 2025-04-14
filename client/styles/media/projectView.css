@@ -33,6 +33,16 @@
         margin-right: 12px !important;
     }
 
+    .projectView__complete-button {
+        top: 12px !important;
+        right: 50px !important;
+    }
+
+    .projectView__delete-button {
+        top: 12px !important;
+        right: 20px !important;
+    }
+
     .projectView__chart {
         display: block !important;
     }

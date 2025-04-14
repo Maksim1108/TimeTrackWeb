@@ -7,7 +7,7 @@ export async function getProjects(user_id) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user_id }),
+            body: JSON.stringify({user_id}),
         });
 
         if (!response.ok) {
@@ -23,9 +23,15 @@ export async function getProjects(user_id) {
 
 export async function getProjectById(projectID) {
     try {
-        const response = await fetch(`${API_URL}/get-project/${projectID}`);
+        const response = await fetch(`${API_URL}/get-project/${projectID}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        });
 
         if (!response.ok) {
+            alert("Доступ запрещен!")
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
@@ -95,7 +101,7 @@ export async function deleteProject(projectID) {
 
         return await response.json();
     } catch (err) {
-            console.error("Error deleting project:", err);
+        console.error("Error deleting project:", err);
         throw err;
     }
 }

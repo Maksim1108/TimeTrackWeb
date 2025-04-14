@@ -19,13 +19,12 @@
             <div class="hero__row row">
                 <button class="hero__button"><a href="./pages/authentication.html" class="hero__link">Log in</a></button>
             </div>
-
         </div>
     </div>
 </section>
 
 <script>
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('token') != undefined) {
         window.location.href = './pages/projects.html';
     }
 </script>

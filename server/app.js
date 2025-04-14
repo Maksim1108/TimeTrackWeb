@@ -5,7 +5,7 @@ const cors = require("cors");
 const {registration, login, confirm} = require("./controllers/authController");
 const {getUser} = require("./controllers/userController");
 const {addProject, getProjects, getProject, updateProject, deleteProject} = require("./controllers/projectController");
-const {addTask, getTasks, updateTaskTime} = require("./controllers/taskController");
+const {addTask, getTasks, updateTaskTime, updateTask, deleteTask} = require("./controllers/taskController");
 const {validateRegistration} = require("./middlewares/registration");
 
 const app = express();
@@ -34,6 +34,8 @@ app.delete('/delete-project/:id', deleteProject);
 app.post('/add-task', addTask);
 app.post('/get-tasks', getTasks);
 app.post('/update-task-time', updateTaskTime);
+app.patch('/update-task/:id', updateTask);
+app.delete('/delete-task/:id', deleteTask);
 
 // User
 app.get('/get-user', getUser);

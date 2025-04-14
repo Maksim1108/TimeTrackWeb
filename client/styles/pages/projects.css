@@ -131,7 +131,7 @@
 }
 
 .projects__complete-button:disabled {
-    background-color: #cccccc; /* Серый */
+    background-color: #cccccc;
     cursor: not-allowed;
 }
 

@@ -70,4 +70,63 @@ const updateTaskTime = async (req, res) => {
     }
 }
 
-module.exports = { addTask, getTasks, updateTaskTime };
+const updateTask = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { completed_at} = req.body;
+
+        if (!id) {
+            return res.status(400).json({ error: "ID задачи не указан!" });
+        }
+
+        const projectExists = await pool.query(
+            'SELECT * FROM tasks WHERE task_id = $1',
+            [id]
+        );
+
+        if (projectExists.rows.length === 0) {
+            return res.status(404).json({ error: "Задача не найдена!" });
+        }
+
+        const result = await pool.query(
+            `UPDATE tasks SET completed_at = $1 WHERE task_id = $2 RETURNING *`,
+            [completed_at, id]
+        );
+
+        res.status(200).json(result.rows[0]);
+    } catch (err) {
+        console.error("Ошибка при обновлении задачи:", err);
+        res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    }
+};
+
+const deleteTask = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ error: "ID проекта не указан!" });
+        }
+
+        const projectExists = await pool.query(
+            'SELECT * FROM tasks WHERE task_id = $1',
+            [id]
+        );
+
+        if (projectExists.rows.length === 0) {
+            return res.status(404).json({ error: "Проект не найден!" });
+        }
+
+        const result = await pool.query(
+            `DELETE FROM tasks WHERE task_id = $1`,
+            [id]
+        );
+
+        res.status(200).json({message: "Задача успешно удалена"});
+    } catch (err) {
+        console.error("Ошибка при удалении задачи:", err);
+        res.status(500).json({ error: "Внутренняя ошибка сервера" });
+    }
+}
+
+module.exports = { addTask, getTasks, updateTaskTime, updateTask, deleteTask};

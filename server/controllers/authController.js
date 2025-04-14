@@ -54,7 +54,7 @@ const login = async (req, res) => {
             return res.status(401).json({error: 'Неверные учетные данные'});
         }
 
-        const token = jwt.sign({userId: user.rows[0].id, email: user.rows[0].email}, process.env.JWT_SECRET, {
+        const token = jwt.sign({user_id: user.rows[0].user_id, email: user.rows[0].email}, process.env.JWT_SECRET, {
             expiresIn: '12h',
         });
 

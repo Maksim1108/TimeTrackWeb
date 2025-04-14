@@ -1,4 +1,5 @@
 const pool = require("../db");
+const jwt = require("jsonwebtoken");
 
 const addProject = async (req, res) => {
     try {
@@ -45,18 +46,21 @@ const getProjects = async (req, res) => {
 const getProject = async (req, res) => {
     try {
         const { id } = req.params;
+        const token  = req.headers.authorization?.split(' ')[1]
+
+        const payload = jwt.verify(token, process.env.JWT_SECRET);
 
         if (!id) {
             return res.status(400).json({ error: "ID проекта не указан!" });
         }
 
         const result = await pool.query(
-            'SELECT * FROM projects WHERE project_id = $1',
-            [id]
+            'SELECT * FROM projects WHERE project_id = $1 AND user_id = $2',
+            [id, payload.user_id]
         );
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Проект не найден!" });
+            return res.status(404).json({ error: "Доступ запрещён!" });
         }
 
         res.status(200).json(result.rows[0]);
