@@ -6,6 +6,7 @@ export const createNewProject = (project, projectList) => {
     const projectElement = document.createElement("div");
     projectElement.classList.add("projects__item");
     projectElement.dataset.projectId = project.project_id;
+    project.completed_at ? projectElement.style.opacity = "0.7" : projectElement.style.opacity = "1";
 
     const contentWrapper = document.createElement("div");
     contentWrapper.classList.add("projects__content");

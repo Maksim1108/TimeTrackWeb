@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require("cors");
 
 const {registration, login, confirm} = require("./controllers/authController");
-const {getUser} = require("./controllers/userController");
+const {getUser, getAllUsers, updateUserRole} = require("./controllers/userController");
 const {addProject, getProjects, getProject, updateProject, deleteProject} = require("./controllers/projectController");
 const {addTask, getTasks, updateTaskTime, updateTask, deleteTask} = require("./controllers/taskController");
 const {validateRegistration} = require("./middlewares/registration");
@@ -39,6 +39,8 @@ app.delete('/delete-task/:id', deleteTask);
 
 // User
 app.get('/get-user', getUser);
+app.get('/get-users', getAllUsers);
+app.post('/update-user-role', updateUserRole);
 
 // Start server
 app.listen(PORT, () => {

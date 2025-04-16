@@ -24,10 +24,11 @@
                     <span class="user__email"></span>
                     <span class="user__name dropdown"></span>
                     <span class="user__greeting"></span>
-                    <button class="user__logout">
-                        <svg fill="#000000" height="16px" width="16px" version="1.1" id="Capa_1"
-                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                             viewBox="0 0 489.9 489.9" xml:space="preserve">
+                    <div style="display: flex" class="user__dropdown-btns">
+                        <button class="user__logout dropdown__btn">
+                            <svg fill="#000000" height="16px" width="16px" version="1.1" id="Capa_1"
+                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 viewBox="0 0 489.9 489.9" xml:space="preserve">
 <g>
 	<g>
 		<g>
@@ -76,8 +77,9 @@
 	</g>
 </g>
 </svg>
-                        Logout
-                    </button>
+                            Logout
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,6 +117,7 @@
         </div>
     </div>
 </section>
+<script src="../utils/auth/authCheck.js"></script>
 <script type="module" src="../scripts/pages/projects.js"></script>
 </body>
 </html>

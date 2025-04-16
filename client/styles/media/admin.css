@@ -1,0 +1,21 @@
+@media (max-width: 391px) {
+    .container {
+        max-width: 370px !important;
+    }
+
+    .admin__columns {
+        flex-direction: column;
+    }
+
+    .admin__users {
+        width: 100% !important;
+    }
+
+    .admin__info {
+        display: block !important;
+    }
+
+    .admin__make-admin {
+        margin-top: 20px;
+    }
+}

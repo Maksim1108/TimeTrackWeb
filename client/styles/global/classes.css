@@ -88,11 +88,11 @@
     font-size: 20px;
 }
 
-.user__logout {
+.dropdown__btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 160px;
+    width: 120px;
     height: 36px;
     font-size: 16px;
     background-color: #888888;
@@ -100,8 +100,8 @@
     transition-duration: 0.2s;
     cursor: pointer;
     text-align: center;
-    margin-top: 12px;
-    color: #000000;
+    margin: 12px 4px 0;
+    color: #161616;
 }
 
 .overlay {

@@ -14,7 +14,7 @@ export async function getProjects(user_id) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        return await response.json();
+        return response.json();
     } catch (err) {
         console.error("Error when receiving projects:", err);
         throw err;

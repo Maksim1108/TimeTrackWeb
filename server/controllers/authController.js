@@ -55,7 +55,7 @@ const login = async (req, res) => {
         }
 
         const token = jwt.sign({user_id: user.rows[0].user_id, email: user.rows[0].email}, process.env.JWT_SECRET, {
-            expiresIn: '12h',
+            expiresIn: '48h',
         });
 
         if (!user.rows[0].isverified) {
